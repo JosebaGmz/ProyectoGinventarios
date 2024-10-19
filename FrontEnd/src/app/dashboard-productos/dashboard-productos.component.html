@@ -1,0 +1,30 @@
+<div class="container" style="margin: 30px;">
+<h2>Dashboard</h2>
+    <div class="dashboard-stats">
+      <div class="stat-card total-products">
+        <h3>Total Products</h3>
+        <p>{{totalProductos}}</p>
+      </div>
+      <div class="stat-card low-stock">
+        <h3>Low Stock Items</h3>
+        <p>{{totalProductosLowStock}}</p>
+      </div>
+      <div class="stat-card out-of-stock">
+        <h3>Out of Stock</h3>
+        <p>{{totalProductosSinStock}}</p>
+      </div>
+      <div class="stat-card total-value">
+        <h3>Total Inventory Value</h3>
+        <p>{{totalSumatorioPrecios}}€</p>
+      </div>
+    </div>
+    <div class="chart-container">
+      <h3>Product Quantity Distribution</h3>
+      <div class="bar-chart">
+        <div *ngFor="let producto of productos" class="bar" [style.height.%]="getHeightPercentage(producto.cantidadExistencia)">
+          <span class="bar-value">{{producto.cantidadExistencia}}</span>
+          <span class="bar-label">{{producto.descripcion}}</span>
+        </div>
+      </div>
+    </div>
+</div>
