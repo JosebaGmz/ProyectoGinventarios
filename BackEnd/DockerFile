@@ -1,0 +1,27 @@
+# Etapa de construcción para el frontend
+FROM node:18 AS frontend-build
+WORKDIR /GestionInventarios/FrontEnd
+COPY FrontEnd/package*.json ./
+RUN npm install
+COPY FrontEnd/ ./
+RUN npm run build
+
+# Etapa de construcción para el backend
+FROM openjdk:21.0.4-jdk-slim AS backend-build
+WORKDIR /GestionInventarios/BackEnd
+COPY BackEnd/pom.xml ./
+COPY BackEnd/src ./src
+RUN ./mvnw clean package
+
+# Etapa final para ejecutar ambos
+FROM openjdk:21.0.4-jdk-slim
+WORKDIR /GestionInventarios
+COPY --from=frontend-build /GestionInventarios/FrontEnd/dist ./FrontEnd/dist
+COPY --from=backend-build /GestionInventarios/BackEnd/target/inventarios-0.0.1-SNAPSHOT.jar ./backend.jar
+
+# Exponer los puertos necesarios
+EXPOSE 8080
+EXPOSE 4200
+
+# Comando para ejecutar ambos servidores (backend en un puerto y frontend en otro)
+CMD ["sh", "-c", "java -jar backend.jar & serve -s FrontEnd/dist -l 4200"]
