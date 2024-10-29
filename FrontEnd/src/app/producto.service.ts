@@ -8,7 +8,7 @@ import { Producto } from './producto';
 })
 export class ProductoService {
 
-  private urlBase = "https://proyectoginventariosweb.onrender.com//inventario-app/productos"
+  private urlBase = "https://proyectoginventariosweb.onrender.com/inventario-app/productos"
 
   constructor(private clienteHttp : HttpClient) { }
 
