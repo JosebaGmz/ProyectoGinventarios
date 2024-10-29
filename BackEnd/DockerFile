@@ -14,7 +14,7 @@ COPY BackEnd/src ./src
 RUN ./mvnw clean package
 
 # Etapa final para ejecutar ambos
-FROM openjdk:21.0.4-jdk-slim
+FROM openjdk:21-jdk-slim
 WORKDIR /GestionInventarios
 COPY --from=frontend-build /GestionInventarios/FrontEnd/dist ./FrontEnd/dist
 COPY --from=backend-build /GestionInventarios/BackEnd/target/inventarios-0.0.1-SNAPSHOT.jar ./backend.jar
