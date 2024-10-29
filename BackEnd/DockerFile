@@ -19,15 +19,9 @@ WORKDIR /GestionInventarios
 COPY --from=frontend-build /GestionInventarios/FrontEnd/dist ./FrontEnd/dist
 COPY --from=backend-build /GestionInventarios/BackEnd/target/inventarios-0.0.1-SNAPSHOT.jar ./backend.jar
 
-# Instalar http-server
-RUN apt-get update && apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g http-server
-
 # Exponer los puertos necesarios
 EXPOSE 8080
 EXPOSE 4200
 
 # Comando para ejecutar ambos servidores (backend en un puerto y frontend en otro)
-CMD ["sh", "-c", "java -jar backend.jar & http-server ./FrontEnd/dist -p 4200"]
+CMD ["sh", "-c", "java -jar backend.jar & serve ./FrontEnd/dist -l 4200"]
