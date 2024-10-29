@@ -6,8 +6,6 @@ RUN npm install
 COPY FrontEnd/ ./
 RUN npm run build
 
-RUN npm install -g serve
-
 # Etapa de construcción para el backend
 FROM maven:3.9.9-eclipse-temurin-21 AS backend-build
 WORKDIR /GestionInventarios/BackEnd
@@ -26,4 +24,4 @@ EXPOSE 8080
 EXPOSE 4200
 
 # Comando para ejecutar ambos servidores (backend en un puerto y frontend en otro)
-CMD ["sh", "-c", "java -jar backend.jar & serve ./FrontEnd/dist -l 4200"]
+CMD ["sh", "-c", "java -jar backend.jar & ./FrontEnd/dist -l 4200"]
