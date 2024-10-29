@@ -11,7 +11,7 @@ FROM maven:3.9.9-eclipse-temurin-21 AS backend-build
 WORKDIR /GestionInventarios/BackEnd
 COPY BackEnd/pom.xml ./
 COPY BackEnd/src ./src
-RUN mvnw clean package
+RUN mvn clean package
 
 # Etapa final para ejecutar ambos
 FROM maven:3.9.9-eclipse-temurin-21
