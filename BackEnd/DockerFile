@@ -6,6 +6,8 @@ RUN npm install
 COPY FrontEnd/ ./
 RUN npm run build
 
+RUN npm install -g serve
+
 # Etapa de construcción para el backend
 FROM maven:3.9.9-eclipse-temurin-21 AS backend-build
 WORKDIR /GestionInventarios/BackEnd
