@@ -8,43 +8,43 @@ import { Producto } from './producto';
 })
 export class ProductoService {
 
-  private urlBase = "http://localhost:8080/inventario-app/productos"
+  private urlBase = "https://proyectoginventariosweb.onrender.com"
 
   constructor(private clienteHttp : HttpClient) { }
 
   obtenerProductosLista(): Observable<Producto[]>{
-    return this.clienteHttp.get<Producto[]>(this.urlBase);
+    return this.clienteHttp.get<Producto[]>(this.urlBase+"/productos");
   }
 
   agregarProducto(producto: Producto): Observable<Object>{
-    return this.clienteHttp.post(this.urlBase, producto);
+    return this.clienteHttp.post(this.urlBase+"/productos", producto);
   }
 
   obtenerProductoPorId(id: number){
-    return this.clienteHttp.get<Producto>(`${this.urlBase}/${id}`);
+    return this.clienteHttp.get<Producto>(`${this.urlBase+"/productos"}/${id}`);
   }
 
   editarProducto(id: number, producto: Producto): Observable<Object>{
-    return this.clienteHttp.put(`${this.urlBase}/${id}`,producto);
+    return this.clienteHttp.put(`${this.urlBase+"/productos"}/${id}`,producto);
   }
 
   eliminarProducto(id: number): Observable<Object>{
-    return this.clienteHttp.delete(`${this.urlBase}/${id}`);
+    return this.clienteHttp.delete(`${this.urlBase+"/productos"}/${id}`);
   }
 
   contarProductos(): Observable<number> {
-    return this.clienteHttp.get<number>(`${this.urlBase}/productosCount`);
+    return this.clienteHttp.get<number>(`${this.urlBase+"/productos"}/productosCount`);
   }
 
   contarProductosLowStock(): Observable<number> {
-    return this.clienteHttp.get<number>(`${this.urlBase}/productosCountLow`);
+    return this.clienteHttp.get<number>(`${this.urlBase+"/productos"}/productosCountLow`);
   }
 
   contarProductosSinStock(): Observable<number>{
-    return this.clienteHttp.get<number>(`${this.urlBase}/productosSinStock`);
+    return this.clienteHttp.get<number>(`${this.urlBase+"/productos"}/productosSinStock`);
   }
 
   obtenerSumatorioPrecios(): Observable<number>{
-    return this.clienteHttp.get<number>(`${this.urlBase}/sumatorioPrecios`);
+    return this.clienteHttp.get<number>(`${this.urlBase+"/productos"}/sumatorioPrecios`);
   }
 }
