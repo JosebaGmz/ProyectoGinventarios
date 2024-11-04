@@ -1,11 +1,12 @@
 package gj.inventarios.servicio;
 
-import gj.inventarios.modelo.Producto;
-import gj.inventarios.repositorio.ProductoRepositorio;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import gj.inventarios.modelo.Producto;
+import gj.inventarios.repositorio.ProductoRepositorio;
 @Service
 public class ProductoServicio implements IProductoServicio{
 
@@ -41,6 +42,6 @@ public class ProductoServicio implements IProductoServicio{
     public double sumatorioPrecios() {
         List<Producto> productos = productoRepositorio.findAll();
         return productos.stream()
-                .mapToDouble(Producto::getPrecio).sum();
+                .mapToDouble(producto -> producto.getPrecio() * producto.getCantidadExistencia()).sum();
     }
 }
